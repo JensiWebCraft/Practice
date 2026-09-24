@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 
 import ProtectedRoute from "./pages/ProtectedRoute";
 import PublicRoute from "./pages/PublicRoute";
+import ForgotPassword from "./pages/ForgotPassword";
 
 function App() {
   return (
@@ -36,6 +37,15 @@ function App() {
         />
 
         <Route
+          path="/forgot-password"
+          element={
+            <PublicRoute>
+              <ForgotPassword />
+            </PublicRoute>
+          }
+        />
+
+        <Route
           path="/dashboard"
           element={
             <ProtectedRoute>
@@ -43,6 +53,8 @@ function App() {
             </ProtectedRoute>
           }
         />
+
+
 
       </Routes>
     </BrowserRouter>
