@@ -8,7 +8,8 @@ function Signup() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
+    role: "jobseeker"
   });
   const navigate = useNavigate();
 
@@ -72,6 +73,37 @@ function Signup() {
               </svg>
             </span>
             <input type="password" placeholder="Password" name="password" value={formData.password} onChange={handleChange} />
+          </div>
+
+          {/* Role Selector */}
+          <div className="role-selector-container">
+            <label className="role-label">I am joining as:</label>
+            <div className="role-options">
+              <button
+                type="button"
+                className={`role-option-btn ${formData.role === "jobseeker" ? "active" : ""}`}
+                onClick={() => setFormData({ ...formData, role: "jobseeker" })}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </svg>
+                <span>Job Seeker</span>
+              </button>
+
+              <button
+                type="button"
+                className={`role-option-btn ${formData.role === "company" ? "active" : ""}`}
+                onClick={() => setFormData({ ...formData, role: "company" })}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="16" height="16" x="4" y="4" rx="2" />
+                  <path d="M9 18v-4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4" />
+                  <path d="M9 8h.01M15 8h.01M9 12h.01M15 12h.01" />
+                </svg>
+                <span>Company</span>
+              </button>
+            </div>
           </div>
 
           <button className="auth-btn" type="submit">Sign Up</button>

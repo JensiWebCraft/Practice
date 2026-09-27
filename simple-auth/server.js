@@ -4,6 +4,8 @@ import connectDB from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import companyRoutes from "./routes/companyRoutes.js";
+import JobRoutes from "./routes/jobRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -28,6 +30,10 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+
+app.use("/api/company", companyRoutes);
+
+app.use("/api/jobs", JobRoutes);
 
 const PORT = process.env.PORT || 5000;
 

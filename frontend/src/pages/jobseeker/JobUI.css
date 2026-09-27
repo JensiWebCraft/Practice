@@ -1,0 +1,217 @@
+.job-page-container {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #fef3c7 0%, #fef9c3 40%);
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1.5rem;
+    color: #333;
+}
+
+.job-card-wrapper {
+    background: #ffffff;
+    width: 100%;
+    max-width: 900px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(251, 191, 36, 0.15);
+    padding: 3rem;
+    animation: slideUp 0.5s ease-out;
+}
+
+.job-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #fef3c7;
+}
+
+.job-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+.job-card {
+    background: #fffbeb;
+    border: 1px solid #fef3c7;
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.job-card:hover {
+    box-shadow: 0 6px 16px rgba(251, 191, 36, 0.15);
+    transform: translateY(-4px);
+    border-color: #fbbf24;
+}
+
+.job-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 0.5rem 0;
+}
+
+.job-company {
+    font-size: 0.95rem;
+    color: #d97706;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+}
+
+.job-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.badge {
+    background: #fef3c7;
+    color: #d97706;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.job-detail-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.job-detail-row strong {
+    width: 120px;
+    color: #555;
+}
+
+.job-detail-row span {
+    color: #333;
+    flex: 1;
+}
+
+.job-actions {
+    margin-top: auto;
+    padding-top: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+}
+
+/* Button variants */
+.btn-primary {
+    background-color: #fbbf24;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    flex: 1;
+}
+
+.btn-primary:hover {
+    background-color: #d97706;
+}
+
+.btn-secondary {
+    background-color: #fef3c7;
+    color: #d97706;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    flex: 1;
+}
+
+.btn-secondary:hover {
+    background-color: #fde68a;
+}
+
+.btn-danger {
+    background-color: #fee2e2;
+    color: #ef4444;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    flex: 1;
+}
+
+.btn-danger:hover {
+    background-color: #fca5a5;
+}
+
+/* Details Page specific */
+.details-header {
+    border-bottom: 1px solid #fef3c7;
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+
+.details-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.details-header h3 {
+    color: #d97706;
+    font-size: 1.25rem;
+    margin-top: 0;
+}
+
+.details-description {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #444;
+    margin-bottom: 2.5rem;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    background: #fffbeb;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+}
+
+.detail-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-box .label {
+    font-size: 0.85rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.detail-box .value {
+    font-size: 1.1rem;
+    color: #222;
+    font-weight: 500;
+}

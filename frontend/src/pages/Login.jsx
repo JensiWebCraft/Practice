@@ -25,7 +25,15 @@ function Login() {
                 withCredentials: true,
             });
             console.log(response.data);
-            navigate("/dashboard");
+
+            const role = response.data.user.role;
+
+            if (role === "company") {
+                navigate("/company/dashboard");
+
+            } else {
+                navigate("/dashboard");
+            }
         } catch (err) {
             console.log(err);
         }

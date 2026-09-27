@@ -18,6 +18,13 @@ const userSchema = new mongoose.Schema(
       required: true,
     },
 
+    role: {
+      type: String,
+      enum: ["jobseeker", "company"],
+      default: "jobseeker",
+      required: true,
+    },
+
     resetPasswordToken: {
       type: String,
     },

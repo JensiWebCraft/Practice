@@ -8,7 +8,7 @@ import {
   forgotPassword,
   resetPassword,
 } from "../controller/authController.js";
-import { protect } from "../middleware/authMiddleware.js";
+import protect from "../middleware/authMiddleware.js";
 
 router.post("/signup", signup);
 router.post("/login", login);

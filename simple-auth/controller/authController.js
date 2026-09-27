@@ -5,7 +5,7 @@ import crypto from "crypto";
 
 export const signup = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     //check if user already exists
     const existingUser = await User.findOne({ email });
@@ -25,6 +25,7 @@ export const signup = async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      role,
     });
 
     res.status(201).json({
@@ -67,9 +68,13 @@ export const login = async (req, res) => {
 
     //create jwt
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1d",
-    });
+    const token = jwt.sign(
+      { userId: user._id, role: user.role },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "1d",
+      }
+    );
 
     res.cookie("token", token, {
       httpOnly: true,
@@ -86,6 +91,7 @@ export const login = async (req, res) => {
         userId: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
     });
   } catch (err) {
