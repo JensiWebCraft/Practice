@@ -6,6 +6,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import companyRoutes from "./routes/companyRoutes.js";
 import JobRoutes from "./routes/jobRoutes.js";
+import ApplicationRoutes from "./routes/applicationRoutes.js";
 
 // Load environment variables
 dotenv.config();
@@ -34,6 +35,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/company", companyRoutes);
 
 app.use("/api/jobs", JobRoutes);
+
+app.use("/api/applications", ApplicationRoutes);
 
 const PORT = process.env.PORT || 5000;
 
