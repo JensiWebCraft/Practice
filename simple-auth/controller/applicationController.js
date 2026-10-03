@@ -1,6 +1,9 @@
 import Application from "../models/Application.js";
 import Job from "../models/Job.js";
+<<<<<<< HEAD
 import Company from "../models/Company.js";
+=======
+>>>>>>> 72928728f7df4df51b78d019f6c19f45d98f8661
 
 export const applyJob = async (req, res) => {
     try {
@@ -131,6 +134,7 @@ export const getCompanyApplications = async (req, res) => {
             message: error.message,
         });
     }
+<<<<<<< HEAD
 };
 
 export const getApplicationById = async (req, res) => {
@@ -275,4 +279,6 @@ export const updateApplicationStatus = async (req, res) => {
             message: error.message,
         });
     }
+=======
+>>>>>>> 72928728f7df4df51b78d019f6c19f45d98f8661
 };
