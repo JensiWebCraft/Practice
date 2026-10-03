@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./JobUI.css";
+import api from "../../api/axios";
 
 const MyApplications = () => {
     const navigate = useNavigate();
@@ -11,8 +12,8 @@ const MyApplications = () => {
 
     const fetchMyApplications = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:5000/api/applications/my",
+            const response = await api.get(
+                "/api/applications/my",
                 { withCredentials: true }
             );
             setApplications(response.data.applications);
@@ -60,9 +61,9 @@ const MyApplications = () => {
                 ) : (
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                         {applications.map((app) => (
-                            <div key={app._id} style={{ 
-                                padding: '1.5rem', 
-                                border: '1px solid #ddd', 
+                            <div key={app._id} style={{
+                                padding: '1.5rem',
+                                border: '1px solid #ddd',
                                 borderRadius: '12px',
                                 backgroundColor: '#fff',
                                 boxShadow: '0 2px 4px rgba(0,0,0,0.05)'
@@ -72,9 +73,9 @@ const MyApplications = () => {
                                 </h3>
                                 <p style={{ margin: '0 0 1rem 0', color: '#555' }}>
                                     <strong>Status:</strong> <span style={{
-                                        color: app.status === 'Pending' ? '#d97706' : 
-                                               app.status === 'Accepted' ? '#16a34a' : 
-                                               app.status === 'Rejected' ? '#ef4444' : '#2563eb',
+                                        color: app.status === 'Pending' ? '#d97706' :
+                                            app.status === 'Accepted' ? '#16a34a' :
+                                                app.status === 'Rejected' ? '#ef4444' : '#2563eb',
                                         fontWeight: 'bold'
                                     }}>{app.status}</span>
                                 </p>
@@ -82,15 +83,15 @@ const MyApplications = () => {
                                     Applied on: {new Date(app.createdAt).toLocaleDateString()}
                                 </p>
                                 <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                                    <button 
-                                        className="btn-secondary" 
+                                    <button
+                                        className="btn-secondary"
                                         style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}
                                         onClick={() => app.job?._id && navigate(`/jobs/${app.job._id}`)}
                                     >
                                         View Job
                                     </button>
-                                    <button 
-                                        className="btn-primary" 
+                                    <button
+                                        className="btn-primary"
                                         style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', width: 'auto' }}
                                         onClick={() => navigate(`/applications/${app._id}`)}
                                     >

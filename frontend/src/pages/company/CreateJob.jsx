@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./EditCompany.css"; // Reuse form layout
 import Layout from "../../components/Layout";
+import api from "../../api/axios";
 
 const CreateJob = () => {
     const [formData, setFormData] = useState({
@@ -39,7 +40,7 @@ const CreateJob = () => {
 
         try {
             setLoading(true);
-            const response = await axios.post("http://localhost:5000/api/jobs/create", {
+            const response = await api.post("/api/jobs/create", {
                 ...formData,
                 salaryMin: Number(formData.salaryMin),
                 salaryMax: Number(formData.salaryMax),

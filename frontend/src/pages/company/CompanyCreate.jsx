@@ -4,6 +4,7 @@ import axios from "axios";
 import Layout from "../../components/Layout";
 import { Building2, Info, MapPin, Share2, Users, CheckCircle2 } from "lucide-react";
 import "./CompanyCreate.css";
+import api from "../../api/axios";
 
 function CompanyCreate() {
     const navigate = useNavigate();
@@ -50,8 +51,8 @@ function CompanyCreate() {
         setMessage("");
 
         try {
-            await axios.post(
-                "http://localhost:5000/api/company/create",
+            await api.post(
+                "/api/company/create",
                 formData,
                 {
                     withCredentials: true,
@@ -59,7 +60,7 @@ function CompanyCreate() {
             );
 
             setMessage("Company created successfully! Redirecting...");
-            
+
             setTimeout(() => {
                 navigate("/company/dashboard", { replace: true });
             }, 1500);
@@ -92,11 +93,11 @@ function CompanyCreate() {
 
                 <div className="company-form-card">
                     <form onSubmit={handleSubmit}>
-                        
+
                         {/* Basic Info */}
                         <div className="form-section">
                             <h2 className="section-title">
-                                <Building2 size={22} className="section-icon" /> 
+                                <Building2 size={22} className="section-icon" />
                                 Basic Information
                             </h2>
                             <div className="form-grid">
@@ -126,7 +127,7 @@ function CompanyCreate() {
                         {/* Details */}
                         <div className="form-section">
                             <h2 className="section-title">
-                                <Info size={22} className="section-icon" /> 
+                                <Info size={22} className="section-icon" />
                                 Company Details
                             </h2>
                             <div className="form-grid">
@@ -167,7 +168,7 @@ function CompanyCreate() {
                         {/* Location */}
                         <div className="form-section">
                             <h2 className="section-title">
-                                <MapPin size={22} className="section-icon" /> 
+                                <MapPin size={22} className="section-icon" />
                                 Location
                             </h2>
                             <div className="form-grid">
@@ -189,7 +190,7 @@ function CompanyCreate() {
                                 </div>
                                 <div className="form-group full-width">
                                     <label className="form-label">Full Address</label>
-                                    <textarea name="address" className="form-textarea" style={{minHeight: '80px'}} placeholder="Street address..." value={formData.address} onChange={handleChange} />
+                                    <textarea name="address" className="form-textarea" style={{ minHeight: '80px' }} placeholder="Street address..." value={formData.address} onChange={handleChange} />
                                 </div>
                             </div>
                         </div>
@@ -197,7 +198,7 @@ function CompanyCreate() {
                         {/* HR / Contact */}
                         <div className="form-section">
                             <h2 className="section-title">
-                                <Users size={22} className="section-icon" /> 
+                                <Users size={22} className="section-icon" />
                                 HR Information
                             </h2>
                             <div className="form-grid">
@@ -219,7 +220,7 @@ function CompanyCreate() {
                         {/* Social */}
                         <div className="form-section">
                             <h2 className="section-title">
-                                <Share2 size={22} className="section-icon" /> 
+                                <Share2 size={22} className="section-icon" />
                                 Social Links (Optional)
                             </h2>
                             <div className="form-grid">

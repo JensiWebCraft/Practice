@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Layout from "../../components/Layout";
 import { Plus, Mail, Building, Users, MapPin, FileText, Briefcase, CheckSquare } from "lucide-react";
 import "./CompanyDashboard.css";
+import api from "../../api/axios";
 
 function CompanyDashboard() {
     const navigate = useNavigate();
@@ -17,14 +18,14 @@ function CompanyDashboard() {
             setLoading(true);
 
             // Fetch company data
-            const companyRes = await axios.get("http://localhost:5000/api/company/me", {
+            const companyRes = await api.get("/api/company/me", {
                 withCredentials: true,
             });
             setCompany(companyRes.data.company);
 
             // Fetch jobs data for stats
             try {
-                const jobsRes = await axios.get("http://localhost:5000/api/jobs/my", {
+                const jobsRes = await api.get("/api/jobs/my", {
                     withCredentials: true,
                 });
                 setJobsCount(jobsRes.data?.jobs?.length || 0);
@@ -34,7 +35,7 @@ function CompanyDashboard() {
 
             // Fetch applications data for stats
             try {
-                const appRes = await axios.get("http://localhost:5000/api/applications/company", {
+                const appRes = await api.get("/api/applications/company", {
                     withCredentials: true,
                 });
                 setApplicationsCount(appRes.data?.applications?.length || 0);

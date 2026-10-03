@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import "./JobUI.css";
+import api from "../../api/axios";
 
 const JobDetails = () => {
     const { id } = useParams();
@@ -21,8 +22,8 @@ const JobDetails = () => {
 
     const fetchJob = async () => {
         try {
-            const response = await axios.get(
-                `http://localhost:5000/api/jobs/${id}`, { withCredentials: true }
+            const response = await api.get(
+                `/api/jobs/${id}`, { withCredentials: true }
             );
 
             setJob(response.data.job);
@@ -51,8 +52,8 @@ const JobDetails = () => {
         setIsError(false);
 
         try {
-            const response = await axios.post(
-                "http://localhost:5000/api/applications",
+            const response = await api.post(
+                "/api/applications",
                 {
                     jobId: id,
                     resume: applyData.resume,
@@ -65,7 +66,7 @@ const JobDetails = () => {
             setTimeout(() => {
                 navigate("/dashboard"); // or maybe to My Applications if it exists
             }, 2000);
-            
+
         } catch (error) {
             console.log(error);
             setIsError(true);
@@ -99,7 +100,7 @@ const JobDetails = () => {
     return (
         <div className="job-page-container">
             <div className="job-card-wrapper">
-                
+
                 <div className="details-header">
                     <h1>{job.title}</h1>
                     <h3>{job.company?.companyName}</h3>
@@ -137,7 +138,7 @@ const JobDetails = () => {
                             {new Date(job.applicationDeadline).toLocaleDateString()}
                         </span>
                     </div>
-                    
+
                     <div className="detail-box" style={{ gridColumn: 'span 2' }}>
                         <span className="label">Required Skills</span>
                         <span className="value" style={{ color: '#d97706' }}>
@@ -158,7 +159,7 @@ const JobDetails = () => {
                 ) : (
                     <div style={{ background: '#fef9c3', padding: '2rem', borderRadius: '16px', marginTop: '2rem' }}>
                         <h3 style={{ marginTop: 0, marginBottom: '1.5rem', color: '#d97706' }}>Submit Your Application</h3>
-                        
+
                         {message && (
                             <div style={{ padding: '1rem', borderRadius: '8px', marginBottom: '1.5rem', backgroundColor: isError ? '#fee2e2' : '#dcfce7', color: isError ? '#ef4444' : '#16a34a', fontWeight: 'bold' }}>
                                 {message}
@@ -168,24 +169,24 @@ const JobDetails = () => {
                         <form onSubmit={handleApplySubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                 <label style={{ fontWeight: 600, color: '#333' }}>Resume Link *</label>
-                                <input 
-                                    type="url" 
+                                <input
+                                    type="url"
                                     name="resume"
-                                    required 
+                                    required
                                     value={applyData.resume}
                                     onChange={handleApplyChange}
-                                    placeholder="e.g. Google Drive or Portfolio link" 
+                                    placeholder="e.g. Google Drive or Portfolio link"
                                     style={{ padding: '0.85rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem', outline: 'none' }}
                                 />
                             </div>
-                            
+
                             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                 <label style={{ fontWeight: 600, color: '#333' }}>Cover Letter (Optional)</label>
-                                <textarea 
+                                <textarea
                                     name="coverLetter"
                                     value={applyData.coverLetter}
                                     onChange={handleApplyChange}
-                                    placeholder="Why are you a good fit for this role?" 
+                                    placeholder="Why are you a good fit for this role?"
                                     style={{ padding: '0.85rem', borderRadius: '8px', border: '1px solid #ddd', fontSize: '1rem', minHeight: '120px', resize: 'vertical', outline: 'none' }}
                                 />
                             </div>

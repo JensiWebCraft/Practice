@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import "./EditCompany.css"; // Added CSS import
 import Layout from "../../components/Layout";
+import api from "../../api/axios";
 
 function EditCompany() {
     const navigate = useNavigate();
@@ -42,8 +42,8 @@ function EditCompany() {
     // 1. Get existing company
     const getMyCompany = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:5000/api/company/me",
+            const response = await api.get(
+                "/api/company/me",
                 {
                     withCredentials: true,
                 }
@@ -108,8 +108,8 @@ function EditCompany() {
         setIsError(false);
 
         try {
-            const response = await axios.put(
-                "http://localhost:5000/api/company/me",
+            const response = await api.put(
+                "/api/company/me",
                 formData,
                 {
                     withCredentials: true,

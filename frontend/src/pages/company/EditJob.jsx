@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import "./EditCompany.css"; // Reuse form layout
 import Layout from "../../components/Layout";
+import api from "../../api/axios";
 
 const EditJob = () => {
     const { id } = useParams();
@@ -30,8 +31,8 @@ const EditJob = () => {
     // Get existing job
     const fetchJob = async () => {
         try {
-            const response = await axios.get(
-                `http://localhost:5000/api/jobs/${id}`
+            const response = await api.get(
+                `/api/jobs/${id}`
             );
 
             const job = response.data.job;
@@ -82,7 +83,7 @@ const EditJob = () => {
             setSaving(true);
 
             const response = await axios.put(
-                `http://localhost:5000/api/jobs/${id}`,
+                `/api/jobs/${id}`,
                 {
                     ...formData,
 
@@ -137,7 +138,7 @@ const EditJob = () => {
                         <div className="form-section">
                             <h2>Job Information</h2>
                             <div className="form-grid">
-                                
+
                                 <div className="form-group full-width">
                                     <label>Job Title</label>
                                     <input

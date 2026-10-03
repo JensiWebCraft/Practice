@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axios from "axios";
+import api from "../api/axios";
 
 function ProtectedRoute({ children }) {
     const [loading, setLoading] = useState(true);
@@ -9,8 +10,8 @@ function ProtectedRoute({ children }) {
     useEffect(() => {
         const checkAuth = async () => {
             try {
-                await axios.get(
-                    "http://localhost:5000/api/auth/profile",
+                await api.get(
+                    "/api/auth/profile",
                     {
                         withCredentials: true,
                     }

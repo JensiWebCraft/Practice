@@ -19,7 +19,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://practice-2-9z22.onrender.com",
     credentials: true,
   })
 );

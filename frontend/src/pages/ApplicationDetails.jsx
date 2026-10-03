@@ -2,19 +2,20 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
+import api from "../api/axios";
 
 const ApplicationDetails = () => {
     const { id } = useParams();
     const navigate = useNavigate();
-    
+
     const [application, setApplication] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const fetchApplicationDetails = async () => {
         try {
-            const response = await axios.get(
-                `http://localhost:5000/api/applications/${id}`,
+            const response = await api.get(
+                `/api/applications/${id}`,
                 { withCredentials: true }
             );
             setApplication(response.data.application);
@@ -46,7 +47,7 @@ const ApplicationDetails = () => {
         return (
             <div style={{ padding: '2rem', textAlign: 'center', color: '#ef4444', fontFamily: 'system-ui, sans-serif' }}>
                 <h2>{error}</h2>
-                <button 
+                <button
                     onClick={() => navigate(-1)}
                     style={{ marginTop: '1rem', padding: '0.5rem 1rem', cursor: 'pointer' }}
                 >
@@ -62,7 +63,7 @@ const ApplicationDetails = () => {
 
     return (
         <div style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto', fontFamily: 'system-ui, sans-serif' }}>
-            <button 
+            <button
                 onClick={() => navigate(-1)}
                 style={{ padding: '0.5rem 1rem', background: '#e5e7eb', border: 'none', borderRadius: '4px', cursor: 'pointer', marginBottom: '2rem' }}
             >
@@ -81,12 +82,12 @@ const ApplicationDetails = () => {
                         padding: '0.5rem 1rem',
                         borderRadius: '999px',
                         fontWeight: 'bold',
-                        backgroundColor: application.status === 'Pending' ? '#fef3c7' : 
-                                         application.status === 'Shortlisted' ? '#dcfce7' : 
-                                         application.status === 'Rejected' ? '#fee2e2' : '#fff',
-                        color: application.status === 'Pending' ? '#d97706' : 
-                               application.status === 'Shortlisted' ? '#16a34a' : 
-                               application.status === 'Rejected' ? '#ef4444' : '#000'
+                        backgroundColor: application.status === 'Pending' ? '#fef3c7' :
+                            application.status === 'Shortlisted' ? '#dcfce7' :
+                                application.status === 'Rejected' ? '#fee2e2' : '#fff',
+                        color: application.status === 'Pending' ? '#d97706' :
+                            application.status === 'Shortlisted' ? '#16a34a' :
+                                application.status === 'Rejected' ? '#ef4444' : '#000'
                     }}>
                         {application.status}
                     </span>

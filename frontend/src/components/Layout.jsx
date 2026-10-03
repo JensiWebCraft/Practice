@@ -3,19 +3,20 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./Layout.css";
 import axios from "axios";
 
-import { 
-    LayoutDashboard, 
-    Building2, 
-    Briefcase, 
-    PlusCircle, 
-    Search, 
-    User, 
-    LogOut, 
+import {
+    LayoutDashboard,
+    Building2,
+    Briefcase,
+    PlusCircle,
+    Search,
+    User,
+    LogOut,
     Bell,
     Menu,
     X,
     Users
 } from "lucide-react";
+import api from "../api/axios";
 
 function Layout({ children, role = "company" }) {
     const navigate = useNavigate();
@@ -24,7 +25,7 @@ function Layout({ children, role = "company" }) {
 
     const handleLogout = async () => {
         try {
-            await axios.post("http://localhost:5000/api/auth/logout", {}, {
+            await api.post("/api/auth/logout", {}, {
                 withCredentials: true,
             });
             navigate("/login");
@@ -55,8 +56,8 @@ function Layout({ children, role = "company" }) {
             <aside className={`modern-sidebar ${isMobileSidebarOpen ? "open" : ""}`}>
                 <div className="sidebar-header">
                     <h2 className="brand-logo">WorkFlow <span className="dot">.</span></h2>
-                    <button 
-                        className="close-sidebar" 
+                    <button
+                        className="close-sidebar"
                         onClick={() => setMobileSidebarOpen(false)}
                     >
                         <X size={24} />
@@ -66,7 +67,7 @@ function Layout({ children, role = "company" }) {
                 <nav className="sidebar-nav-container">
                     <ul className="sidebar-nav-list">
                         {navLinks.map((link) => (
-                            <li 
+                            <li
                                 key={link.path}
                                 className={`nav-item ${location.pathname === link.path ? "active" : ""}`}
                                 onClick={() => {
@@ -91,8 +92,8 @@ function Layout({ children, role = "company" }) {
 
             {/* Overlay for mobile sidebar */}
             {isMobileSidebarOpen && (
-                <div 
-                    className="sidebar-overlay" 
+                <div
+                    className="sidebar-overlay"
                     onClick={() => setMobileSidebarOpen(false)}
                 ></div>
             )}
@@ -102,7 +103,7 @@ function Layout({ children, role = "company" }) {
                 {/* Fixed Top Navbar */}
                 <header className="modern-navbar">
                     <div className="nav-left">
-                        <button 
+                        <button
                             className="mobile-menu-btn"
                             onClick={() => setMobileSidebarOpen(true)}
                         >
