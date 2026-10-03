@@ -15,6 +15,9 @@ import Jobs from "./pages/jobseeker/Jobs";
 import JobDetails from "./pages/jobseeker/JobDetails";
 import MyJobs from "./pages/company/MyJobs";
 import EditJob from "./pages/company/EditJob";
+import CompanyApplications from "./pages/company/CompanyApplications";
+import MyApplications from "./pages/jobseeker/MyApplications";
+import ApplicationDetails from "./pages/ApplicationDetails";
 
 function App() {
   return (
@@ -118,6 +121,24 @@ function App() {
         />
 
         <Route
+          path="/my-applications"
+          element={
+            <ProtectedRoute>
+              <MyApplications />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/applications/:id"
+          element={
+            <ProtectedRoute>
+              <ApplicationDetails />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
           path="/company/jobs"
           element={
             <ProtectedRoute>
@@ -131,6 +152,15 @@ function App() {
           element={
             <ProtectedRoute>
               <EditJob />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/company/applications"
+          element={
+            <ProtectedRoute>
+              <CompanyApplications />
             </ProtectedRoute>
           }
         />

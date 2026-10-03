@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "./JobUI.css";
+import Layout from "../../components/Layout";
 
 const Jobs = () => {
     const [jobs, setJobs] = useState([]);
@@ -27,18 +28,11 @@ const Jobs = () => {
         fetchJobs();
     }, []);
 
-    if (loading) {
-        return (
-            <div className="job-page-container">
-                <div className="job-card-wrapper" style={{ textAlign: 'center' }}>
-                    <h2>Loading jobs...</h2>
-                </div>
-            </div>
-        );
-    }
+    // Removed loading block to prevent flash
 
     return (
-        <div className="job-page-container">
+        <Layout role="jobseeker">
+            <div className="job-page-container">
             <div className="job-card-wrapper">
                 <div className="job-header">
                     <h1>Available Jobs</h1>
@@ -94,6 +88,7 @@ const Jobs = () => {
                 )}
             </div>
         </div>
+        </Layout>
     );
 };
 

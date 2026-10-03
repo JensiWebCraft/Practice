@@ -1,5 +1,6 @@
 import Application from "../models/Application.js";
 import Job from "../models/Job.js";
+import Company from "../models/Company.js";
 
 export const applyJob = async (req, res) => {
     try {
@@ -123,6 +124,150 @@ export const getCompanyApplications = async (req, res) => {
             success: true,
             count: applications.length,
             applications,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+export const getApplicationById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const application = await Application.findById(id)
+            .populate(
+                "job",
+                "title description jobType workMode experience location salaryMin salaryMax skills applicationDeadline company"
+            )
+            .populate(
+                "candidate",
+                "fullName email phone skills resume"
+            );
+
+        if (!application) {
+            return res.status(404).json({
+                success: false,
+                message: "Application not found",
+            });
+        }
+
+        // Check authorization
+        if (req.user.role === "jobseeker") {
+            // Job seeker can only see their own application
+            if (
+                !application.candidate ||
+                application.candidate._id.toString() !==
+                req.user.userId.toString()
+            ) {
+                return res.status(403).json({
+                    success: false,
+                    message: "You are not allowed to view this application",
+                });
+            }
+        }
+
+        if (req.user.role === "company") {
+            // Company can only see applications for its own jobs
+            const company = await Company.findOne({
+                owner: req.user.userId,
+            });
+
+            if (!company) {
+                return res.status(404).json({
+                    success: false,
+                    message: "Company profile not found",
+                });
+            }
+
+            if (
+                !application.job ||
+                application.job.company.toString() !==
+                company._id.toString()
+            ) {
+                return res.status(403).json({
+                    success: false,
+                    message: "You are not allowed to view this application",
+                });
+            }
+        }
+
+        res.status(200).json({
+            success: true,
+            application,
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+export const updateApplicationStatus = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+
+        const allowedStatuses = [
+            "Pending",
+            "Shortlisted",
+            "Rejected",
+        ];
+
+        if (!allowedStatuses.includes(status)) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid application status",
+            });
+        }
+
+        const application = await Application.findById(id);
+
+        if (!application) {
+            return res.status(404).json({
+                success: false,
+                message: "Application not found",
+            });
+        }
+
+        const company = await Company.findOne({
+            owner: req.user.userId,
+        });
+
+        if (!company) {
+            return res.status(404).json({
+                success: false,
+                message: "Company profile not found",
+            });
+        }
+
+        const job = await Job.findById(application.job);
+
+        if (!job) {
+            return res.status(404).json({
+                success: false,
+                message: "Job not found",
+            });
+        }
+
+        if (job.company.toString() !== company._id.toString()) {
+            return res.status(403).json({
+                success: false,
+                message: "You are not allowed to update this application",
+            });
+        }
+
+        application.status = status;
+
+        await application.save();
+
+        res.status(200).json({
+            success: true,
+            message: `Application ${status.toLowerCase()} successfully`,
+            application,
         });
     } catch (error) {
         res.status(500).json({

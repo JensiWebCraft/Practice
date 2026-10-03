@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { applyJob, getMyApplications, getCompanyApplications } from "../controller/applicationController.js";
+import { applyJob, getMyApplications, getCompanyApplications, getApplicationById, updateApplicationStatus } from "../controller/applicationController.js";
 import authorizeRole from "../middleware/roleMiddleware.js";
 import protect from "../middleware/authMiddleware.js";
 
@@ -13,5 +13,12 @@ router.get(
     getMyApplications
 );
 router.get("/company", protect, authorizeRole("company"), getCompanyApplications);
+router.get("/:id", protect, getApplicationById)
+router.patch(
+    "/:id/status",
+    protect,
+    authorizeRole("company"),
+    updateApplicationStatus
+);
 
 export default router
