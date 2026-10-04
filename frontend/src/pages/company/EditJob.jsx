@@ -82,7 +82,7 @@ const EditJob = () => {
         try {
             setSaving(true);
 
-            const response = await axios.put(
+            const response = await api.put(
                 `/api/jobs/${id}`,
                 {
                     ...formData,
@@ -95,9 +95,6 @@ const EditJob = () => {
                         .split(",")
                         .map((skill) => skill.trim())
                         .filter(Boolean),
-                },
-                {
-                    withCredentials: true,
                 }
             );
 
