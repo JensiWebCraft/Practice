@@ -1,4 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
@@ -18,10 +20,12 @@ import EditJob from "./pages/company/EditJob";
 import CompanyApplications from "./pages/company/CompanyApplications";
 import MyApplications from "./pages/jobseeker/MyApplications";
 import ApplicationDetails from "./pages/ApplicationDetails";
+import Profile from "./pages/jobseeker/Profile";
 
 function App() {
   return (
     <BrowserRouter>
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} closeOnClick pauseOnHover />
       <Routes>
 
         <Route
@@ -125,6 +129,15 @@ function App() {
           element={
             <ProtectedRoute>
               <MyApplications />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
             </ProtectedRoute>
           }
         />

@@ -19,6 +19,7 @@ connectDB();
 
 app.use(
   cors({
+    // origin: ["http://localhost:5173"],
     origin: ["https://practice-nine-gold.vercel.app"],
     credentials: true,
   })
