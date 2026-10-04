@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import "../App.css";
+import api from "../api/axios";
 
 function Signup() {
 
@@ -23,7 +24,7 @@ function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/signup", formData);
+      const response = await api.post("/api/auth/signup", formData);
       console.log(response.data);
 
     } catch (err) {
