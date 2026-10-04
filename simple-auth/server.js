@@ -19,7 +19,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: "https://practice-2-9z22.onrender.com",
+    origin: "https://practice-lake-delta.vercel.app/",
     credentials: true,
   })
 );
