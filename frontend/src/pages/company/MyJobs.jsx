@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import api from "../../api/axios";
 import { useNavigate } from "react-router-dom";
 import "../../pages/jobseeker/JobUI.css"; // Reuse Job UI CSS
 import Layout from "../../components/Layout";
@@ -12,11 +12,8 @@ const MyJobs = () => {
 
     const fetchMyJobs = async () => {
         try {
-            const response = await axios.get(
-                "http://localhost:5000/api/jobs/my",
-                {
-                    withCredentials: true,
-                }
+            const response = await api.get(
+                "/api/jobs/my"
             );
 
             setJobs(response.data.jobs);
@@ -42,11 +39,8 @@ const MyJobs = () => {
         }
 
         try {
-            const response = await axios.delete(
-                `http://localhost:5000/api/jobs/${id}`,
-                {
-                    withCredentials: true,
-                }
+            const response = await api.delete(
+                `/api/jobs/${id}`
             );
 
             alert(response.data.message);
