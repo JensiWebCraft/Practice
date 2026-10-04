@@ -19,7 +19,7 @@ connectDB();
 
 app.use(
   cors({
-    origin: ["https://practice-lake-delta.vercel.app", "https://practice-nmpx.vercel.app"],
+    origin: ["https://practice-nine-gold.vercel.app"],
     credentials: true,
   })
 );
