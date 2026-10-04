@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import axios from "axios";
+
 import api from "../api/axios";
 
 function ProtectedRoute({ children }) {
